@@ -1,5 +1,12 @@
 def nightRoute(city):
-	print city[1][2]
+	res = []
+	for x in range(0, len(city)-1):
+		# print city[x]
+		_city = [ _x for _x in city[x] if _x >= 0]
+		res.append(min(_city))
+
+	print sum(res)
+	return sum(res)
 	
 
 
