@@ -21,13 +21,29 @@ def parkingSpot(carDimensions, parkingLot, luckySpot):
 		_y = (lS[3]-lS[1]) + 1
 
 		count = 1
-		for x in range(spots[0][0], cD[0]):
-			if [spots[0][0], x] not in spots:
-				spots.insert(count, [spots[0][0], x])
-			for y in range(spots[0][1], cD[1]):
-				if [y, x] not in spots:
-					spots.insert(count, [y, x])
-			count += 1
+
+		if _x == l:
+			spot_x = spots[0][0]
+			spot_y = spots[0][1]
+		else:
+			spot_x = spots[1][0]
+			spot_y = spots[1][1]
+
+		# for x in range(spot_x, _x):
+		# 	if [x, spot_y] not in spots:
+		# 		spots.insert(count, [x, spot_y])
+		# 	for y in range(spot_y, _y):
+		# 		if [y, spot_y] not in spots:
+		# 			spots.insert(count, [y, spot_y])
+		# 	count += 1
+
+		# for x in range(spots[0][0], cD[0]+1):
+		# 	if [spots[0][0], x] not in spots:
+		# 		spots.insert(count, [spots[0][0], x])
+		# 	for y in range(spots[0][1], cD[1]+1):
+		# 		if [y, x] not in spots:
+		# 			spots.insert(count, [y, x])
+		# 	count += 1
 
 		# for y in range(spots[0][1], cD[1]):
 		# 	if [y, x] not in spots:
@@ -37,7 +53,12 @@ def parkingSpot(carDimensions, parkingLot, luckySpot):
 		# 			spots.insert(count, [spots[0][0], x])
 		# 	count += 1
 
-		print spots
+		# while(len(spots) < numOfSpots):
+		# 	# spots.insert(count, [])
+		# 	# TODO: know the increment of the coordinates, WHICH IS WHICH?
+		# 	count += 1
+
+		# print spots
 
 		for x in spots:
 			if parkingLot[x[0]][x[1]]:
@@ -47,17 +68,92 @@ def parkingSpot(carDimensions, parkingLot, luckySpot):
 		print 1
 		return 1
 
+	else:
+		return 0
+
+# # Output true
+# parkingSpot(
+# 	[7, 2], 
+# 	[	
+# 		[0,1,0], 
+# 		[0,0,0], 
+# 		[0,0,0], 
+# 		[0,0,0], 
+# 		[0,0,0], 
+# 		[0,0,0], 
+# 		[0,0,0], 
+# 		[0,0,0]
+# 	],
+# 	[1, 0, 7, 1]
+# )
+# (7-1) + 1 = 7
+# (1-0) + 1 = 2
+# (7, 1)
+# (0, 1)
+# [1, 0], [7, 1]
+# [1, 0], [7, 0], [1, 1], [7, 1]
+
+_x = []
+array = [7, 2]
+array2 = [1, 0, 7, 1]
+# _x = []
+# array = [4, 1]
+# array2 = [0, 3, 3, 3]
+
+# [[0, 3], [1, 3], [2, 3], [3, 3]]
+# [4, 1]
+# [0, 3, 3, 3]
+# cond 1
+# for x in range(0, 4):
+# 	for y in range(3, 4):
+# 		_x.append([x, y])
+
+# [7, 2]
+# [1, 0, 7, 1]
+# [1, 0], [7, 0], [1, 1], [7, 1]
+# cond 1
+# for x in range(1, 8):
+# 	for y in range(0, 2):
+# 		_x.append([ x, y ])
+
+# [1, 1], [1, 2], [1, 3]
+# [2, 1], [2, 2], [2, 3]
+# [3, 2], 
+# [1, 1, 2, 3]
+# cond 2
+# for x in range(1, 3):
+# 	for y in range(1, 4):
+# 		_x.append([ x, y ])
+
+# [7, 2],
+# [1, 1, 2, 7]
+# [1, 1], [1, 7], [2, 1], [2, 7]
+# cond 2
+# for x in range(1, 3):
+# 	for y in range(1, 8):
+# 		_x.append([ x, y ])
+
+# [2, 1], 
+# [0, 1, 1, 1]
+# [0, 1], [1, 1]
+# cond 1
+for x in range(0, 2):
+	for y in range(1, 2):
+		_x.append([ x, y ])
+
+print _x
+
 # # # Output true
-parkingSpot(
-	[4, 1], 
-	[	
-		[1,0,1,0,1,0], 
-		[1,0,0,0,1,0], 
-		[0,0,0,0,0,1], 
-		[1,0,0,0,1,1]
-	],
-	[0, 3, 3, 3]
-)
+# parkingSpot(
+# 	[4, 1], 
+# 	[	
+# 		[1,0,1,0,1,0], 
+# 		[1,0,0,0,1,0], 
+# 		[0,0,0,0,0,1], 
+# 		[1,0,0,0,1,1]
+# 	],
+# 	[0, 3, 3, 3]
+# )
 # (3-0) + 1 = 4
 # (3-3) + 1 = 1
 # (0, 3)
@@ -67,6 +163,27 @@ parkingSpot(
 
 # [0, 3], [3, 3]
 
+# # Output true
+# parkingSpot(
+# 	[7, 2], 
+# 	[	
+# 		[0,1,0], 
+# 		[0,0,0], 
+# 		[0,0,0], 
+# 		[0,0,0], 
+# 		[0,0,0], 
+# 		[0,0,0], 
+# 		[0,0,0], 
+# 		[0,0,0]
+# 	],
+# 	[1, 0, 7, 1]
+# )
+# (7-1) + 1 = 7
+# (1-0) + 1 = 2
+# (7, 1)
+# (0, 1)
+# [1, 0], [7, 1]
+# [1, 0], [7, 0], [1, 1], [7, 1]
 
 # # Output true
 # parkingSpot(
@@ -118,28 +235,6 @@ parkingSpot(
 # (1, 1)
 # (2, 3)
 # [1, 2], [1, 3]
-
-# # Output true
-# parkingSpot(
-# 	[7, 2], 
-# 	[	
-# 		[0,1,0], 
-# 		[0,0,0], 
-# 		[0,0,0], 
-# 		[0,0,0], 
-# 		[0,0,0], 
-# 		[0,0,0], 
-# 		[0,0,0], 
-# 		[0,0,0]
-# 	],
-# 	[1, 0, 7, 1]
-# )
-# (7-1) + 1 = 7
-# (1-0) + 1 = 2
-# (7, 1)
-# (0, 1)
-# [1, 0], [7, 1]
-# [1, 0], [7, 0], [1, 1], [7, 1]
 
 # # Output true
 # parkingSpot(
