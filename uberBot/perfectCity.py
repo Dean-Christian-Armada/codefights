@@ -51,6 +51,8 @@ def perfectCity(departure, destination):
 								x[count] += res
 								print res
 								print x
+				else:
+					return 0
 
 
 	res += abs(x[0] - y[0])

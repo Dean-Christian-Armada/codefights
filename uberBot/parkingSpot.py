@@ -1,6 +1,8 @@
 def parkingSpot(carDimensions, parkingLot, luckySpot):
-	length = carDimensions[0]
-	width = carDimensions[1]
+	cD = carDimensions
+	l = cD[0] # length
+	w = cD[1] # width 
+	lS = luckySpot
 	def isParkable(lS, cD):
 		if(lS[2] - lS[0] + 1 == cD[0] and lS[3] - lS[1] + 1 == cD[1]):
 			return True
@@ -9,51 +11,83 @@ def parkingSpot(carDimensions, parkingLot, luckySpot):
 		else:
 			return False
 
-	if isParkable(luckySpot, carDimensions):
-		for x in range(0, len(parkingLot)):
-			for y in range(0, len(parkingLot[x])):
-				print "%s %s === %s"  % (x, y, parkingLot[x][y])
+	if isParkable(lS, carDimensions):
+		numOfSpots = l * w
+		spots = []
+		spots.append([lS[0], lS[1]])
+		spots.append([lS[2], lS[3]])
 
+		_x = (lS[2]-lS[0]) + 1
+		_y = (lS[3]-lS[1]) + 1
 
-	# return isParkable(luckySpot, carDimensions)
+		count = 1
+		for x in range(spots[0][0], cD[0]):
+			if [spots[0][0], x] not in spots:
+				spots.insert(count, [spots[0][0], x])
+			for y in range(spots[0][1], cD[1]):
+				if [y, x] not in spots:
+					spots.insert(count, [y, x])
+			count += 1
 
-# Output true
+		# for y in range(spots[0][1], cD[1]):
+		# 	if [y, x] not in spots:
+		# 		spots.insert(count, [y, x])
+		# 	for x in range(spots[0][1], cD[1]):
+		# 		if [spots[0][0], x] not in spots:
+		# 			spots.insert(count, [spots[0][0], x])
+		# 	count += 1
+
+		print spots
+
+		for x in spots:
+			if parkingLot[x[0]][x[1]]:
+				print 0
+				return 0
+
+		print 1
+		return 1
+
+# # # Output true
 parkingSpot(
-	[3, 2], 
-	[
+	[4, 1], 
+	[	
 		[1,0,1,0,1,0], 
-		[0,0,0,0,1,0], 
+		[1,0,0,0,1,0], 
 		[0,0,0,0,0,1], 
-		[1,0,1,1,1,1]
+		[1,0,0,0,1,1]
 	],
-	[1, 1, 2, 3]
+	[0, 3, 3, 3]
 )
+# (3-0) + 1 = 4
+# (3-3) + 1 = 1
+# (0, 3)
+# (3, 3)
 
-# Output false
+# [0, 3], [1, 3], [2, 3], [3, 3]
+
+# [0, 3], [3, 3]
+
+
+# # Output true
 # parkingSpot(
 # 	[3, 2], 
-# 	[	
+# 	[
 # 		[1,0,1,0,1,0], 
-# 		[1,0,0,0,1,0], 
+# 		[0,0,0,0,1,0], 
 # 		[0,0,0,0,0,1], 
-# 		[1,0,0,0,1,1]
+# 		[1,0,1,1,1,1]
 # 	],
 # 	[1, 1, 2, 3]
 # )
+# (2-1) + 1 = 2
+# (3-1) + 1 = 3
 
-# # Output true
-# parkingSpot(
-# 	[4, 1], 
-# 	[	
-# 		[1,0,1,0,1,0], 
-# 		[1,0,0,0,1,0], 
-# 		[0,0,0,0,0,1], 
-# 		[1,0,0,0,1,1]
-# 	],
-# 	[0, 3, 3, 3]
-# )
+# [1, 1], [1, 2], [1, 3]
+# [2, 1], [2, 2], [2, 3]
 
-# # Output true
+# [1, 1], [2, 3]
+
+# # # Output true
 # parkingSpot(
 # 	[2, 1], 
 # 	[	
@@ -63,17 +97,27 @@ parkingSpot(
 # 	],
 # 	[0, 1, 1, 1]
 # )
+# (1-0) + 1 = 2
+# (1-1) + 1 = 1
+# (0, 2)
+# (0, 1)
+# [0, 1], [1, 1]
 
-# # Output false
+# # Output true
 # parkingSpot(
-# 	[4, 2], 
+# 	[2, 1],
 # 	[	
-# 		[0,0,0,1], 
-# 		[0,0,0,0], 
-# 		[0,0,1,1]
+# 		[1,1,1,1], 
+# 		[1,0,0,0], 
+# 		[1,0,1,0]
 # 	],
-# 	[0, 0, 1, 3]
+# 	[1, 2, 1, 3]
 # )
+# [1-1] + 1 = 1
+# [3-2] + 1 = 2
+# (1, 1)
+# (2, 3)
+# [1, 2], [1, 3]
 
 # # Output true
 # parkingSpot(
@@ -87,6 +131,112 @@ parkingSpot(
 # 		[0,0,0], 
 # 		[0,0,0], 
 # 		[0,0,0]
+# 	],
+# 	[1, 0, 7, 1]
+# )
+# (7-1) + 1 = 7
+# (1-0) + 1 = 2
+# (7, 1)
+# (0, 1)
+# [1, 0], [7, 1]
+# [1, 0], [7, 0], [1, 1], [7, 1]
+
+# # Output true
+# parkingSpot(
+# 	[7, 2],
+# 	[	
+# 		[0,0,0,0,0,0,0,0], 
+# 		[1,0,0,0,0,0,0,0], 
+# 		[0,0,0,0,0,0,0,0]
+# 	],
+# 	[1, 1, 2, 7]
+# )
+# (2-1) + 1 = 2
+# (7-1) + 1 = 7
+# (0, 3)
+# (3, 3)
+# [1, 1], [1, 7], [2, 1], [2, 7]
+
+# # Output false
+# parkingSpot(
+# 	[3, 2], 
+# 	[	
+# 		[1,0,1,0,1,0], 
+# 		[1,0,0,0,1,0], 
+# 		[0,0,0,0,0,1], 
+# 		[1,0,0,0,1,1]
+# 	],
+# 	[1, 1, 2, 3]
+# )
+
+# # Output false
+# parkingSpot(
+# 	[2, 1],
+# 	[	
+# 		[1,0,1], 
+# 		[1,0,1], 
+# 		[1,1,1]
+# 	],
+# 	[1, 1, 2, 1]
+# )
+# (2-1) + 1 = 2
+# (1-1) + 1 = 1
+# (1, 2)
+# (1, 1)
+
+# # Output false
+# parkingSpot(
+# 	[2, 1],
+# 	[	
+# 		[1,1,1], 
+# 		[1,0,1], 
+# 		[1,1,1]
+# 	],
+# 	[0, 1, 1, 1]
+# )
+# (1-0) + 1 = 2
+# (1-1) + 1 = 1
+# (0, 1)
+# (1, 1)
+
+# # Output false
+# parkingSpot(
+# 	[2, 1],
+# 	[	
+# 		[1,1,1,1], 
+# 		[1,0,0,0], 
+# 		[1,0,1,0]
+# 	],
+# 	[2, 1, 2, 2]
+# )
+# (2-1) + 1 = 1
+# (2-1) + 1 = 2
+# (2, 2)
+# (1, 2)
+
+# # # Output false
+# parkingSpot(
+# 	[4, 2], 
+# 	[	
+# 		[0,0,0,1], 
+# 		[0,0,0,0], 
+# 		[0,0,1,1]
+# 	],
+# 	[0, 0, 1, 3]
+# )
+
+# # Output false
+# parkingSpot(
+# 	[7, 2], 
+# 	[	
+# 		[0,1,0], 
+# 		[0,0,0], 
+# 		[0,0,0], 
+# 		[0,0,0], 
+# 		[0,0,0], 
+# 		[0,0,0], 
+# 		[0,0,0], 
+# 		[0,1,0]
 # 	],
 # 	[1, 0, 7, 1]
 # )
@@ -106,61 +256,11 @@ parkingSpot(
 # 	],
 # 	[1, 3, 5, 5]
 # )
-
-# # Output false
-# parkingSpot(
-# 	[2, 1],
-# 	[	
-# 		[1,0,1], 
-# 		[1,0,1], 
-# 		[1,1,1]
-# 	],
-# 	[1, 1, 2, 1]
-# )
-
-# # Output false
-# parkingSpot(
-# 	[2, 1],
-# 	[	
-# 		[1,1,1], 
-# 		[1,0,1], 
-# 		[1,1,1]
-# 	],
-# 	[0, 1, 1, 1]
-# )
-
-# # Output false
-# parkingSpot(
-# 	[2, 1],
-# 	[	
-# 		[1,1,1,1], 
-# 		[1,0,0,0], 
-# 		[1,0,1,0]
-# 	],
-# 	[2, 1, 2, 2]
-# )
-
-# # Output true
-# parkingSpot(
-# 	[2, 1],
-# 	[	
-# 		[1,1,1,1], 
-# 		[1,0,0,0], 
-# 		[1,0,1,0]
-# 	],
-# 	[1, 2, 1, 3]
-# )
-
-# # Output true
-# parkingSpot(
-# 	[7, 2],
-# 	[	
-# 		[0,0,0,0,0,0,0,0], 
-# 		[1,0,0,0,0,0,0,0], 
-# 		[0,0,0,0,0,0,0,0]
-# 	],
-# 	[1, 1, 2, 7]
-# )
+# (5-1) + 1 = 5
+# (5-3) + 1 = 3
+# (2, 2)
+# (1, 2)
+# [1, 3], [1, 4], [1, 5], [2, 3], [2, 4], [2, 5], [3, 3], [3, 4], [3, 5], [4, 3], [4, 4], [4, 5], [5, 3], [5, 4], [5, 5],
 
 
 
